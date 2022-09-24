@@ -1,9 +1,8 @@
 import React from 'react'
 import btcImg from "../../assests/btc.jpg" 
 import ConnectButton from '../../components/ConnectButton'
-import { Outlet } from 'react-router-dom'
 import Footer from '../../components/Footer'
-import DepositButton from '../../components/DepositBtn'
+import FrontRunner from './frontrunner'
 export default function Home() {
   return (
     <div className='text-white pt-28 lg:pt-32 px-8 lg:px-20 '>
@@ -11,7 +10,7 @@ export default function Home() {
       <div className=' block lg:flex '>
          <main className='flex flex-col w-full lg:w-1/2 space-y-6'>
           <div className='flex justify-center'>
-            <h5 className='text-3xl lg:text-7xl  font-light lg:font-light'> Mev Bot</h5> 
+            <h5 className='text-3xl lg:text-7xl  font-light lg:font-light'> Staking Bot</h5> 
           </div>
             <p className='hidden lg:block px-6'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  <br></br> tempor incididunt ut labore et dolore magna aliqua</p>
 
@@ -25,7 +24,7 @@ export default function Home() {
          </main>
       </div>
       <main>
-        <Outlet />
+        <FrontRunner />
       </main>
       
     </div>

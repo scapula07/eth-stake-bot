@@ -10,7 +10,7 @@ const Web3 =require("web3")
 
 
 
-export default function WithdrawButton() {
+export default function StakeButton() {
     const account =useRecoilValue(AccountState)
     const web3 = new Web3(window.ethereum)
     const [trigger,setTrigger] =useState(false)
@@ -27,7 +27,7 @@ export default function WithdrawButton() {
        if(account.length===0) return toast.error("Connect to wallet");
        const _amount=web3.utils.toWei(deposit,'ether')
         try{
-            const res =await stakeContract.methods.withdraw(_amount).send({from:account})
+            const res =await stakeContract.methods.stake(_amount).send({from:account})
             console.log(res)
             toast.success(" successful!");
         }catch(e){
@@ -45,7 +45,7 @@ export default function WithdrawButton() {
         
         <button className='bg-slate-800 px-4 py-1 rounded-lg text-sm hover:bg-white hover:text-slate-800 '
          onClick={()=>setTrigger(true)}
-        >Withdraw</button>
+        >Stake</button>
     </div>
 
     <Modal trigger={trigger} cname="h-44 w-1/4 shadow rounded-lg py-4 px-4 flex flex-col ">

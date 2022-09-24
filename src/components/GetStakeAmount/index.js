@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import IERC20 from "../../IERC20ABI.json"
+import stakeAbi from "../../abi.json"
 import { AccountState} from '../../recoilState/globalState'
 import {useRecoilState,useRecoilValue} from "recoil"
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,14 +10,14 @@ const Web3 =require("web3")
 
 
 
-export default function DepositButton() {
+export default function GetStakeAmount() {
     const account =useRecoilValue(AccountState)
     const web3 = new Web3(window.ethereum)
     const [trigger,setTrigger] =useState(false)
     const [deposit,setDeposit] =useState("")
-    const TokenContract = new web3.eth.Contract(
-        IERC20,
-        "0x6B175474E89094C44Da98b954EedeAC495271d0F"
+    const stakeContract = new web3.eth.Contract(
+        stakeAbi,
+        "0x058201aa50c66EcA681105eF8F294920c2080a82"
     )
     console.log(web3)
   
@@ -25,11 +25,11 @@ export default function DepositButton() {
         console.log("starting trade")
 
        if(account.length===0) return toast.error("Connect to wallet");
-       const _amount=web3.utils.toWei(deposit,'ether')
+      
         try{
-            const res =await TokenContract.methods.transfer("0x6Df0E5E592029fEf046FFA03cc93f79C1589634f",_amount).send({from:account})
+            const res =await stakeContract.methods.getStackingAmount(account).call()
             console.log(res)
-            toast.success("Transfer successful!");
+            toast.success(" successful!");
         }catch(e){
             console.log(e)
             toast.error("Something went wrong!");
@@ -45,7 +45,7 @@ export default function DepositButton() {
         
         <button className='bg-slate-800 px-4 py-1 rounded-lg text-sm hover:bg-white hover:text-slate-800 '
          onClick={()=>setTrigger(true)}
-        >Deposit</button>
+        >Stake Balance</button>
     </div>
 
     <Modal trigger={trigger} cname="h-44 w-1/4 shadow rounded-lg py-4 px-4 flex flex-col ">

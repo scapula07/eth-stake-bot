@@ -2,13 +2,13 @@
 	{
 		"inputs": [
 			{
-				"internalType": "contract ISwapRouter",
-				"name": "_Router1",
+				"internalType": "address",
+				"name": "_stakingToken",
 				"type": "address"
 			},
 			{
 				"internalType": "address",
-				"name": "_Router2",
+				"name": "_rewardsToken",
 				"type": "address"
 			}
 		],
@@ -20,40 +20,143 @@
 		"inputs": [
 			{
 				"indexed": false,
-				"internalType": "string",
-				"name": "assest",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"internalType": "string",
-				"name": "base",
-				"type": "string"
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
 			},
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "profit",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "ClaimReward",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "rewards",
 				"type": "uint256"
 			},
 			{
 				"indexed": false,
-				"internalType": "bool",
-				"name": "success",
-				"type": "bool"
+				"internalType": "uint256",
+				"name": "lastUpdateTime",
+				"type": "uint256"
 			}
 		],
-		"name": "TradeSucces",
+		"name": "RewardUpdated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amountSoFar",
+				"type": "uint256"
+			}
+		],
+		"name": "Stake",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amountRemaining",
+				"type": "uint256"
+			}
+		],
+		"name": "Withdraw",
 		"type": "event"
 	},
 	{
 		"inputs": [],
-		"name": "Router2",
-		"outputs": [
+		"name": "claimReward",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
 			{
 				"internalType": "address",
-				"name": "",
+				"name": "account",
 				"type": "address"
+			}
+		],
+		"name": "earned",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "enableLock",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "enableUnLock",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getApyRate",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -61,64 +164,13 @@
 	},
 	{
 		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_token1",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_token2",
-				"type": "address"
-			}
-		],
-		"name": "SushiwapToUniswapTrade",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_token1",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_token2",
-				"type": "address"
-			}
-		],
-		"name": "UniswapToSushiwapTrade",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_router",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_token1",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_token2",
-				"type": "address"
-			},
 			{
 				"internalType": "uint256",
 				"name": "_amount",
 				"type": "uint256"
 			}
 		],
-		"name": "getAmountOutMin",
+		"name": "getDailyProfit",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -133,11 +185,24 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_tokenContractAddress",
+				"name": "account",
 				"type": "address"
 			}
 		],
-		"name": "getBalance",
+		"name": "getEarnedAmount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getMaxmumAmount",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -152,22 +217,38 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_pairAddress",
+				"name": "account",
 				"type": "address"
 			}
 		],
-		"name": "getSushiswapReserve",
+		"name": "getStackingAmount",
 		"outputs": [
 			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
-			},
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getStakingFee",
+		"outputs": [
 			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
-			},
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getTotalStaked",
+		"outputs": [
 			{
 				"internalType": "uint256",
 				"name": "",
@@ -179,12 +260,12 @@
 	},
 	{
 		"inputs": [],
-		"name": "name",
+		"name": "getWithdrawFee",
 		"outputs": [
 			{
-				"internalType": "string",
+				"internalType": "uint256",
 				"name": "",
-				"type": "string"
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -192,33 +273,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "owner",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "poolFee",
-		"outputs": [
-			{
-				"internalType": "uint24",
-				"name": "",
-				"type": "uint24"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "recoverEth",
+		"name": "restake",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -227,21 +282,27 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "tokenAddress",
+				"name": "",
 				"type": "address"
 			}
 		],
-		"name": "recoverTokens",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"name": "rewards",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [],
-		"name": "swapRouter",
+		"name": "rewardsToken",
 		"outputs": [
 			{
-				"internalType": "contract ISwapRouter",
+				"internalType": "contract IERC20",
 				"name": "",
 				"type": "address"
 			}
@@ -250,7 +311,112 @@
 		"type": "function"
 	},
 	{
-		"stateMutability": "payable",
-		"type": "receive"
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "setApyRate",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "setMaximumAmount",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "setStakingFee",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "setWithdrawFee",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "stake",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "stakingToken",
+		"outputs": [
+			{
+				"internalType": "contract IERC20",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "withdraw",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "withdrawToken",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	}
 ]

@@ -65,7 +65,7 @@ export default function FrontRunner() {
   return (
     <div className='text-white pt-20 lg:pt-10'>
         <main className='flex flex-start lg:justify-center px-8'>
-            <h5 className=''>Staking Bot</h5>
+            <h5 className=''>Mev Bot</h5>
         </main>
         <div className='flex lg:flex-row flex-col items-center space-y-6 lg:space-x-6 '>
             <main className=' w-full lg:w-2/5 flex flex-col shadow-lg rounded-lg px-8 py-8'>

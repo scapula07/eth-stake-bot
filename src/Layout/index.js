@@ -4,7 +4,7 @@ import Header from '../components/Header'
 
 export default function Layout({children}) {
   return (
-    <div className='bg-black h-full overflow-hidden'>
+    <div className='bg-black h-screen lg:h-full overflow-hidden'>
         <Header />
         
         <div>

@@ -83,7 +83,7 @@ export default function FrontRunner() {
                      <h5 className='text-slate-400 text-sm'>Balance</h5>
                         <h5>
                             <span className='text-3xl lg:text-5xl font-light'>{Number(Balance).toFixed(3)}</span>
-                            <span className='text-xs '>ETH</span>
+                            <span className='text-xs '>DAI</span>
                         </h5>
                       
                      </main>
@@ -103,7 +103,7 @@ export default function FrontRunner() {
             </main>
             <main className='w-full lg:w-3/5 shadow-xl  rounded-lg  px-20 '>
                <div >
-                <h5 className='text-lg font-semibold'>Earned Reward : {Number(reward).toFixed(3)} ETH</h5>
+                <h5 className='text-lg font-semibold'>Earned Reward : {Number(reward).toFixed(3)} DAI</h5>
                </div>
               
             </main>
